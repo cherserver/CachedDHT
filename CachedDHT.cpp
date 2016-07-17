@@ -48,6 +48,7 @@ CachedDHT::CachedDHT(uint8_t pin, uint8_t type)
 	, m_current_normal(0)
 	, m_current_temp(NAN)
 	, m_current_hum(NAN) {
+		m_dht_data.begin();
 		Register(this);
 	}
 
