@@ -8,7 +8,12 @@
 #define NORMALIZE_SIZE 10	//Temperature or humidity normalize vector size
 #define MAX_DHT_COUNT 2		//Maximum count of attached DHTs
 
-#define DHT_WARMUP_DELAY_MS 4000	//DHT warmup delay (Datasheet says not to get values from dht during some period)
+#define DHT_WARMUP_DELAY_MS 4000	//DHT warmup delay (ms) (Datasheet says not to get values from dht during some period)
+
+#define DEFAULT_UPDATE_TIME_MS 2000	//DHT data default update time
+
+//You may change update time by setting it in milliseconds
+void SetUpdateTime(unsigned long periodMs);
 
 class CachedDHT {
 public:

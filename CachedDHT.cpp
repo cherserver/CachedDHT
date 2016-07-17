@@ -12,7 +12,11 @@ static void UpdateAll(Task* me) {
 	}
 }
 
-static Task UpdateAllTask(2000, UpdateAll);
+static Task UpdateAllTask(DEFAULT_UPDATE_TIME_MS, UpdateAll);
+
+void SetUpdateTime(unsigned long periodMs) {
+	UpdateAllTask.setPeriodMs(periodMs);
+}
 
 static void UnRegister(CachedDHT * to_unreg) {
 	for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i) {
@@ -25,7 +29,7 @@ static void Register(CachedDHT * to_reg) {
 	if (!TimerRegistered) {
 		SoftTimer.add(&UpdateAllTask);
 		for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i)
-			dht_array[i] == NULL;
+			dht_array[i] = NULL;
 
 		TimerRegistered = true;
 	}
