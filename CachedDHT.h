@@ -19,6 +19,8 @@ public:
 	float GetHumidity() const;
 
 	bool HasValues() const;
+
+	void UpdateValues();
 private:
 	DHT m_dht_data;
 
@@ -32,7 +34,6 @@ private:
 	float m_temp_vector[NORMALIZE_SIZE];
 	float m_hum_vector[NORMALIZE_SIZE];
 
-	void UpdateValues();
 	void NormalizeData(float ict, float ich);
 };
 
