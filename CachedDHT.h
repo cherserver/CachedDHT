@@ -2,7 +2,7 @@
 #define _CachedDHT_H_
 
 #include <Arduino.h>
-#include <dht.h>		// USE https://github.com/adafruit/DHT-sensor-library
+#include <DHT.h>	// USE https://github.com/adafruit/DHT-sensor-library
 #include <SoftTimer.h>	// USE https://github.com/prampec/arduino-softtimer/
 
 #define NORMALIZE_SIZE 10	//Temperature or humidity normalize vector size
