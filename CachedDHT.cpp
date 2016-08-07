@@ -5,7 +5,7 @@
 static bool TimerRegistered = false;
 static CachedDHT* dht_array[MAX_DHT_COUNT]; //initialized in Register
 
-static void UpdateAll(Task* me) {
+void UpdateAll(Task* me) {
 	for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i) {
 		if (dht_array[i] != NULL)
 			dht_array[i]->UpdateValues();
@@ -18,14 +18,14 @@ void SetUpdateTime(unsigned long periodMs) {
 	UpdateAllTask.setPeriodMs(periodMs);
 }
 
-static void UnRegister(CachedDHT * to_unreg) {
+void UnRegister(CachedDHT * to_unreg) {
 	for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i) {
 		if (dht_array[i] == to_unreg)
 			dht_array[i] = NULL;
 	}
 }
 
-static void Register(CachedDHT * to_reg) {
+void Register(CachedDHT * to_reg) {
 	if (!TimerRegistered) {
 		SoftTimer.add(&UpdateAllTask);
 		for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i)
@@ -35,8 +35,15 @@ static void Register(CachedDHT * to_reg) {
 	}
 
 	for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i) {
-		if (dht_array[i] == NULL)
+		if (dht_array[i] == to_reg)
+			return; //already registered
+	}
+
+	for (byte i = 0; i < SIZEOF_ARRAY(dht_array); ++i) {
+		if (dht_array[i] == NULL) {
 			dht_array[i] = to_reg;
+			return;
+		}
 	}
 }
 
